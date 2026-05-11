@@ -1,4 +1,4 @@
-const API = 'api.php';
+const API = '/api/buildings';
 
 function switchTab(name) {
   document.querySelectorAll('.tab').forEach(t => {

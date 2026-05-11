@@ -11,24 +11,24 @@ class BuildingRepository
 
     public function __construct()
     {
-        $uri = 'mongodb+srv://bpgualotuna1:bpgualotuna1@cluster0.qamyg9n.mongodb.net/?appName=Cluster0';
+        $uri = getenv('MONGODB_URI');
         $client = new Client($uri);
-        $this->collection = $client->Building->buildings;
+        $this->collection = $client->gualotunaDB->buildings;
     }
 
     public function insert(array $data): array
     {
         $doc = [
-            'name'         => $data['name'],
-            'address'      => $data['address'],
-            'floors'       => (int)$data['floors'],
-            'area_sqm'     => (float)$data['area_sqm'],
-            'type'         => $data['type'],
-            'year_built'   => (int)$data['year_built'],
-            'owner'        => $data['owner'],
-            'status'       => $data['status'],
-            'value_usd'    => (float)$data['value_usd'],
-            'material'     => $data['material'],
+            'name'       => $data['name'],
+            'address'    => $data['address'],
+            'floors'     => (int)$data['floors'],
+            'area_sqm'   => (float)$data['area_sqm'],
+            'type'       => $data['type'],
+            'year_built' => (int)$data['year_built'],
+            'owner'      => $data['owner'],
+            'status'     => $data['status'],
+            'value_usd'  => (float)$data['value_usd'],
+            'material'   => $data['material'],
         ];
         $result = $this->collection->insertOne($doc);
         return ['inserted_id' => (string)$result->getInsertedId()];
